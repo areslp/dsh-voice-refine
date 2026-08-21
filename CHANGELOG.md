@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Added
+
+- Added the selected Echo Seal project icon to the README and public repository assets.
+
 ## 0.1.0-alpha.7 - 2026-08-21
 
 ### Changed

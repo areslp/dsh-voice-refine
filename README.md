@@ -1,5 +1,9 @@
 # DSH Voice Refine
 
+<p align="center">
+  <img src="assets/dsh-voice-refine-icon.png" alt="DSH Voice Refine Echo Seal icon" width="220">
+</p>
+
 > Speak naturally. Keep control of what gets sent.
 
 **DSH Voice Refine turns speech into an agent-ready draft in DeepSeek Harness—without relying on browser speech recognition and without silently sending or rewriting your words.** Press and hold to record, release to process, review the result, and send only when it says what you mean.

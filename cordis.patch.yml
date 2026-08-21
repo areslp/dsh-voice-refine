@@ -1,0 +1,11 @@
+- insert:
+    - id: dsh-voice-refine
+      name: dsh-voice-refine
+      config:
+        asr:
+          kind: openai-transcription
+          baseUrl: https://asr.example.invalid/v1
+          model: whisper-1
+          apiKeyEnv: DSH_VOICE_ASR_API_KEY
+        refine:
+          kind: disabled

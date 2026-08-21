@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run pack:check
+      - name: Check out the pinned DSH rc.8 contract reference
+        uses: actions/checkout@v7
+        with:
+          repository: deepseek-ai/deepseek-harness
+          ref: 141eb6fef83422698aef7a981029e843e8161534
+          path: .dsh-contract
+          persist-credentials: false
+      - name: Verify the DSH rc.8 client contract
+        run: npm run verify:dsh-rc8-contract
+        env:
+          DSH_SOURCE_DIR: ${{ github.workspace }}/.dsh-contract

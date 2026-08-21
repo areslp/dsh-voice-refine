@@ -1,0 +1,102 @@
+{
+  "name": "dsh-voice-refine",
+  "version": "0.1.0-alpha.7",
+  "description": "Provider-neutral voice input for DeepSeek Harness with pluggable ASR, conservative LLM refinement, and correction memory.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/areslp/dsh-voice-refine.git"
+  },
+  "homepage": "https://github.com/areslp/dsh-voice-refine#readme",
+  "bugs": {
+    "url": "https://github.com/areslp/dsh-voice-refine/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": "./lib/client.js",
+    "./protocol": {
+      "types": "./lib/types/shared/protocol.d.ts",
+      "default": "./lib/shared/protocol.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "platform": "web"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/types/**/*.d.ts",
+    "cordis.patch.yml",
+    "README.md",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "docs"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "clean": "node scripts/clean.mjs",
+    "prepack": "npm run build",
+    "test": "node --import tsx --test tests/*.test.ts tests/**/*.test.ts",
+    "test:coverage": "node --import tsx --test --experimental-test-coverage tests/*.test.ts tests/**/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "verify:dsh-rc8-contract": "node scripts/verify-dsh-rc8-contract.mjs",
+    "pack:check": "npm pack --dry-run --cache .cache/npm"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "voice-input",
+    "speech-to-text",
+    "asr",
+    "llm",
+    "self-hosted"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.1-rc.1 <4.1.0",
+    "@deepseek-ai/dsh-client-runtime": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-ui-conversation": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.0-rc.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": { "optional": true },
+    "@deepseek-ai/dsh-client-runtime": { "optional": true },
+    "@deepseek-ai/dsh-client-ui-conversation": { "optional": true },
+    "@deepseek-ai/dsh-client-ui-slots": { "optional": true },
+    "react": { "optional": true },
+    "react-dom": { "optional": true }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1-rc.1",
+    "@types/node": "^24.0.0",
+    "@types/react": "~18.3.1",
+    "@types/react-dom": "~18.3.1",
+    "@types/react-test-renderer": "^18.3.1",
+    "esbuild": "^0.25.0",
+    "react": "^18.2.0",
+    "react-dom": "18.2.0",
+    "react-test-renderer": "^18.2.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}
